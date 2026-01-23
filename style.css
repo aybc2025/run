@@ -11,31 +11,31 @@
 
 body {
   margin: 0;
-  font-family: 'Inter', sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   background: var(--bg);
   color: var(--text);
-  direction: rtl;
 }
 
 header {
-  padding: 24px 32px;
-  font-size: 24px;
+  padding: 16px;
+  font-size: 22px;
   font-weight: 700;
+  text-align: center;
 }
 
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 24px 48px;
+  padding: 0 16px 32px;
   display: grid;
   grid-template-columns: repeat(12, 1fr);
-  gap: 24px;
+  gap: 16px;
 }
 
 .card {
   background: var(--card);
   border-radius: var(--radius);
-  padding: 20px 24px;
+  padding: 16px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.03);
 }
 
@@ -44,49 +44,33 @@ header {
   display: flex;
   flex-direction: column;
   gap: 6px;
+  align-items: center;
+  text-align: center;
 }
 
 .kpi .label {
-  font-size: 13px;
+  font-size: 12px;
   color: var(--muted);
 }
 
 .kpi .value {
-  font-size: 32px;
+  font-size: 28px;
   font-weight: 700;
 }
 
-.chart {
-  grid-column: span 6;
-}
-
-.chart h3,
-.records h3 {
-  margin: 0 0 12px 0;
-  font-size: 16px;
-  font-weight: 600;
-}
-
-.records {
-  grid-column: span 3;
-}
-
-.record {
-  display: flex;
-  justify-content: space-between;
-  padding: 8px 0;
-  font-size: 14px;
-}
+.chart { grid-column: span 6; }
+.records { grid-column: span 3; }
+.full { grid-column: span 12; }
 
 table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 14px;
+  font-size: 13px;
 }
 
 th, td {
-  padding: 10px 8px;
-  text-align: left;
+  padding: 8px 6px;
+  text-align: right;
 }
 
 th {
@@ -95,21 +79,24 @@ th {
   border-bottom: 1px solid #e5e7eb;
 }
 
-tr {
-  border-bottom: 1px solid #f1f5f9;
-}
-
-tr:hover {
-  background: #f9fafb;
-}
-
-.full {
-  grid-column: span 12;
-}
+tr { border-bottom: 1px solid #f1f5f9; }
 
 footer {
   text-align: center;
   color: var(--muted);
   font-size: 12px;
-  padding: 24px 0 12px;
+  padding: 16px 0 12px;
+}
+
+/* --- Mobile layout --- */
+@media (max-width: 768px) {
+  .container { grid-template-columns: repeat(2, 1fr); }
+
+  .kpi { grid-column: span 1; }
+  .chart { grid-column: span 2; }
+  .records { grid-column: span 2; }
+  .full { grid-column: span 2; }
+
+  header { font-size: 20px; }
+  .kpi .value { font-size: 24px; }
 }
