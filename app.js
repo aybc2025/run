@@ -1,26 +1,33 @@
-fetch('runs.json')
-  .then(response => response.json())
-  .then(runs => {
-    buildKPIs(runs);
-    buildRecords(runs);
-    buildTable(runs);
-    buildCharts(runs);
+let runs = [];
+
+// טעינת הנתונים מ־runs.json
+fetch("runs.json")
+  .then(function(response) {
+    if (!response.ok) {
+      throw new Error("לא ניתן לטעון runs.json");
+    }
+    return response.json();
   })
-  .catch(err => console.error('שגיאה בטעינת נתונים:', err));
-
-function buildKPIs(runs) {
-  let totalRuns = runs.length;
-  let totalKm = 0;
-  let totalMinutes = 0;
-  let totalPace = 0;
-
-  runs.forEach(r => {
-    totalKm += r.km;
-    totalMinutes += r.minutes;
-    totalPace += r.pace;
+  .then(function(data) {
+    runs = data;
+    initDashboard();
+  })
+  .catch(function(error) {
+    console.error("שגיאה בטעינת הנתונים:", error);
   });
 
-  let avgPace = totalPace / runs.length;
+function initDashboard() {
+  buildKPIs();
+  buildRecords();
+  buildTable();
+  buildCharts();
+}
+
+function buildKPIs() {
+  const totalRuns = runs.length;
+  const totalKm = runs.reduce(function(s, r) { return s + r.km; }, 0);
+  const totalMinutes = runs.reduce(function(s, r) { return s + r.minutes; }, 0);
+  const avgPace = runs.reduce(function(s, r) { return s + r.pace; }, 0) / runs.length;
 
   document.getElementById("totalRuns").textContent = totalRuns;
   document.getElementById("totalKm").textContent = totalKm.toFixed(2);
@@ -28,21 +35,22 @@ function buildKPIs(runs) {
   document.getElementById("avgPace").textContent = avgPace.toFixed(2);
 }
 
-function buildRecords(runs) {
-  let bestDistance = Math.max(...runs.map(r => r.km));
-  let bestPace = Math.min(...runs.map(r => r.pace));
-  let bestTime = Math.max(...runs.map(r => r.minutes));
+function buildRecords() {
+  const bestDistance = Math.max.apply(null, runs.map(function(r) { return r.km; }));
+  const bestPace = Math.min.apply(null, runs.map(function(r) { return r.pace; }));
+  const bestTime = Math.max.apply(null, runs.map(function(r) { return r.minutes; }));
 
   document.getElementById("bestDistance").textContent = bestDistance.toFixed(2) + " ק\"מ";
-  document.getElementById("bestPace").textContent = bestPace.toFixed(2) + " דקה/ק\"מ";
-  document.getElementById("bestTime").textContent = bestTime.toFixed(0) + " דקות";
+  document.getElementById("bestPace").textContent = bestPace.toFixed(2) + " דק/ק\"מ";
+  document.getElementById("bestTime").textContent = bestTime.toFixed(0) + " דק";
 }
 
-function buildTable(runs) {
-  let tbody = document.querySelector("#runsTable tbody");
-  tbody.innerHTML = '';
-  runs.forEach(r => {
-    let tr = document.createElement("tr");
+function buildTable() {
+  const tbody = document.querySelector("#runsTable tbody");
+  tbody.innerHTML = "";
+
+  runs.forEach(function(r) {
+    const tr = document.createElement("tr");
     tr.innerHTML =
       "<td>" + r.date + "</td>" +
       "<td>" + r.km.toFixed(2) + "</td>" +
@@ -53,20 +61,52 @@ function buildTable(runs) {
   });
 }
 
-function buildCharts(runs) {
-  let labels = runs.map(r => r.date);
-  let distances = runs.map(r => r.km);
-  let paces = runs.map(r => r.pace);
+function buildCharts() {
+  const labels = runs.map(function(r) { return r.date; });
 
   new Chart(document.getElementById("distanceChart"), {
     type: "line",
-    data: { labels, datasets: [{ label: "ק\"מ", data: distances, borderWidth: 2, tension: 0.3, fill: false }] },
-    options: { plugins: { legend: { display: false } }, scales: { x: { grid: { display: false } }, y: { grid: { color: "#f1f5f9" } } } }
+    data: {
+      labels: labels,
+      datasets: [{
+        label: "ק\"מ",
+        data: runs.map(function(r) { return r.km; }),
+        borderWidth: 2,
+        tension: 0.3,
+        fill: false
+      }]
+    },
+    options: {
+      plugins: { legend: { display: false } },
+      responsive: true,
+      maintainAspectRatio: false
+    }
   });
 
   new Chart(document.getElementById("paceChart"), {
     type: "line",
-    data: { labels, datasets: [{ label: "דקה/ק\"מ", data: paces, borderWidth: 2, tension: 0.3, fill: false }] },
-    options: { plugins: { legend: { display: false } }, scales: { x: { grid: { display: false } }, y: { reverse: true, grid: { color: "#f1f5f9" } } } }
+    data: {
+      labels: labels,
+      datasets: [{
+        label: "דק/ק\"מ",
+        data: runs.map(function(r) { return r.pace; }),
+        borderWidth: 2,
+        tension: 0.3,
+        fill: false
+      }]
+    },
+    options: {
+      plugins: { legend: { display: false } },
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        y: { reverse: true }
+      }
+    }
   });
+}
+
+// --- Service Worker registration ---
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("sw.js");
 }
