@@ -1,0 +1,115 @@
+:root {
+  --bg: #f7f8fa;
+  --card: #ffffff;
+  --text: #1f2937;
+  --muted: #6b7280;
+  --accent: #2563eb;
+  --radius: 14px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  direction: rtl;
+}
+
+header {
+  padding: 24px 32px;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px 48px;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 24px;
+}
+
+.card {
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 20px 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+}
+
+.kpi {
+  grid-column: span 3;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.kpi .label {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.kpi .value {
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.chart {
+  grid-column: span 6;
+}
+
+.chart h3,
+.records h3 {
+  margin: 0 0 12px 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.records {
+  grid-column: span 3;
+}
+
+.record {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  font-size: 14px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+th, td {
+  padding: 10px 8px;
+  text-align: left;
+}
+
+th {
+  color: var(--muted);
+  font-weight: 600;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+tr {
+  border-bottom: 1px solid #f1f5f9;
+}
+
+tr:hover {
+  background: #f9fafb;
+}
+
+.full {
+  grid-column: span 12;
+}
+
+footer {
+  text-align: center;
+  color: var(--muted);
+  font-size: 12px;
+  padding: 24px 0 12px;
+}
