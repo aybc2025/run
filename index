@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+  <meta charset="UTF-8" />
+  <title>לוח ריצות</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<header>🏃 לוח ריצות</header>
+
+<div class="container">
+
+  <div class="card kpi">
+    <div class="label">מספר ריצות</div>
+    <div class="value" id="totalRuns">–</div>
+  </div>
+
+  <div class="card kpi">
+    <div class="label">סך קילומטרים</div>
+    <div class="value" id="totalKm">–</div>
+  </div>
+
+  <div class="card kpi">
+    <div class="label">סך זמן (דקות)</div>
+    <div class="value" id="totalMinutes">–</div>
+  </div>
+
+  <div class="card kpi">
+    <div class="label">קצב ממוצע (דקה/ק\"מ)</div>
+    <div class="value" id="avgPace">–</div>
+  </div>
+
+  <div class="card chart">
+    <h3>קילומטרים לאורך זמן</h3>
+    <canvas id="distanceChart"></canvas>
+  </div>
+
+  <div class="card chart">
+    <h3>קצב לאורך זמן</h3>
+    <canvas id="paceChart"></canvas>
+  </div>
+
+  <div class="card records">
+    <h3>שיאים אישיים</h3>
+    <div class="record"><span>ריצה ארוכה ביותר</span><strong id="bestDistance">–</strong></div>
+    <div class="record"><span>קצב הטוב ביותר</span><strong id="bestPace">–</strong></div>
+    <div class="record"><span>זמן ריצה ארוך ביותר</span><strong id="bestTime">–</strong></div>
+  </div>
+
+  <div class="card full">
+    <h3>כל הריצות</h3>
+    <table id="runsTable">
+      <thead>
+        <tr>
+          <th>תאריך</th>
+          <th>ק\"מ</th>
+          <th>דקות</th>
+          <th>דקה/ק\"מ</th>
+          <th>מאמץ</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+</div>
+
+<footer>לוח ריצות מינימליסטי</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
