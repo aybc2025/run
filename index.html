@@ -1,10 +1,18 @@
 <!DOCTYPE html>
-<html lang="he">
+<html lang="he" dir="rtl">
 <head>
   <meta charset="UTF-8" />
   <title>לוח ריצות</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#2563eb">
+
+  <!-- CSS -->
   <link rel="stylesheet" href="style.css">
+
+  <!-- Chart.js -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
@@ -19,17 +27,17 @@
   </div>
 
   <div class="card kpi">
-    <div class="label">סך קילומטרים</div>
+    <div class="label">סה"כ קילומטרים</div>
     <div class="value" id="totalKm">–</div>
   </div>
 
   <div class="card kpi">
-    <div class="label">סך זמן (דקות)</div>
+    <div class="label">סה"כ זמן (דקות)</div>
     <div class="value" id="totalMinutes">–</div>
   </div>
 
   <div class="card kpi">
-    <div class="label">קצב ממוצע (דקה/ק\"מ)</div>
+    <div class="label">קצב ממוצע</div>
     <div class="value" id="avgPace">–</div>
   </div>
 
@@ -45,9 +53,9 @@
 
   <div class="card records">
     <h3>שיאים אישיים</h3>
-    <div class="record"><span>ריצה ארוכה ביותר</span><strong id="bestDistance">–</strong></div>
-    <div class="record"><span>קצב הטוב ביותר</span><strong id="bestPace">–</strong></div>
-    <div class="record"><span>זמן ריצה ארוך ביותר</span><strong id="bestTime">–</strong></div>
+    <div>🏅 ריצה ארוכה ביותר: <strong id="bestDistance">–</strong></div>
+    <div>⚡ קצב הטוב ביותר: <strong id="bestPace">–</strong></div>
+    <div>⏱ זמן הארוך ביותר: <strong id="bestTime">–</strong></div>
   </div>
 
   <div class="card full">
@@ -56,9 +64,9 @@
       <thead>
         <tr>
           <th>תאריך</th>
-          <th>ק\"מ</th>
+          <th>ק"מ</th>
           <th>דקות</th>
-          <th>דקה/ק\"מ</th>
+          <th>דקה/ק"מ</th>
           <th>מאמץ</th>
         </tr>
       </thead>
@@ -68,8 +76,9 @@
 
 </div>
 
-<footer>לוח ריצות מינימליסטי</footer>
+<footer>Running Dashboard • PWA</footer>
 
+<!-- JS -->
 <script src="app.js"></script>
 </body>
 </html>
