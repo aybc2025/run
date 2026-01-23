@@ -39,6 +39,8 @@ header {
   box-shadow: 0 2px 8px rgba(0,0,0,0.03);
 }
 
+/* --- KPIs --- */
+
 .kpi {
   grid-column: span 3;
   display: flex;
@@ -58,8 +60,43 @@ header {
   font-weight: 700;
 }
 
-.chart { grid-column: span 6; }
-.records { grid-column: span 3; }
+/* --- Charts --- */
+
+.chart {
+  grid-column: span 6;
+  height: 300px;              /* גובה קבוע לכרטיס */
+  display: flex;
+  flex-direction: column;
+}
+
+.chart h3 {
+  margin: 0 0 8px 0;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.chart canvas {
+  flex: 1;                    /* תופס את כל הגובה שנותר */
+  width: 100% !important;
+  height: 100% !important;   /* קריטי למניעת מתיחה */
+  max-height: 100%;
+}
+
+/* --- Records --- */
+
+.records {
+  grid-column: span 3;
+}
+
+.record {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  padding: 6px 0;
+}
+
+/* --- Table --- */
+
 .full { grid-column: span 12; }
 
 table {
@@ -79,7 +116,11 @@ th {
   border-bottom: 1px solid #e5e7eb;
 }
 
-tr { border-bottom: 1px solid #f1f5f9; }
+tr {
+  border-bottom: 1px solid #f1f5f9;
+}
+
+/* --- Footer --- */
 
 footer {
   text-align: center;
@@ -88,15 +129,38 @@ footer {
   padding: 16px 0 12px;
 }
 
-/* --- Mobile layout --- */
+/* ========================= */
+/* ===== Mobile layout ==== */
+/* ========================= */
+
 @media (max-width: 768px) {
-  .container { grid-template-columns: repeat(2, 1fr); }
 
-  .kpi { grid-column: span 1; }
-  .chart { grid-column: span 2; }
-  .records { grid-column: span 2; }
-  .full { grid-column: span 2; }
+  .container {
+    grid-template-columns: repeat(2, 1fr);
+  }
 
-  header { font-size: 20px; }
-  .kpi .value { font-size: 24px; }
+  .kpi {
+    grid-column: span 1;
+  }
+
+  .chart {
+    grid-column: span 2;
+    height: 260px;          /* גרפים נמוכים יותר במובייל */
+  }
+
+  .records {
+    grid-column: span 2;
+  }
+
+  .full {
+    grid-column: span 2;
+  }
+
+  header {
+    font-size: 20px;
+  }
+
+  .kpi .value {
+    font-size: 24px;
+  }
 }
