@@ -67,21 +67,21 @@ header {
   height: 300px;
   display: flex;
   flex-direction: column;
-  overflow: hidden;  /* 🔥 קריטי - מונע הצפה */
+  overflow: hidden;
 }
 
 .chart h3 {
   margin: 0 0 8px 0;
   font-size: 14px;
   font-weight: 600;
-  flex-shrink: 0;  /* 🔥 מונע כיווץ של הכותרת */
+  flex-shrink: 0;
 }
 
 .chart canvas {
   flex: 1;
-  min-height: 0;  /* 🔥 קריטי - מאפשר התכווצות */
+  min-height: 0;
   max-height: 100%;
-  width: 100% !important;
+  width: 100%;
 }
 
 /* --- Records --- */
@@ -90,11 +90,20 @@ header {
   grid-column: span 3;
 }
 
-.record {
-  display: flex;
-  justify-content: space-between;
+.records h3 {
+  margin: 0 0 12px 0;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.records > div {
+  padding: 8px 0;
   font-size: 13px;
-  padding: 6px 0;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.records > div:last-child {
+  border-bottom: none;
 }
 
 /* --- Table --- */
@@ -147,7 +156,7 @@ footer {
 
   .chart {
     grid-column: span 2;
-    height: 240px;          /* גרפים נמוכים יותר במובייל */
+    height: 240px;
   }
 
   .records {
