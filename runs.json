@@ -7,5 +7,6 @@
   { "date": "2026-01-22", "km": 3.73, "minutes": 36, "pace": 9.65, "effort": "גבוה" },
   { "date": "2026-01-25", "km": 3.89, "minutes": 37, "pace": 9.51, "effort": "בינוני" },
   { "date": "2026-02-18", "km": 4.24, "minutes": 38, "pace": 8.96, "effort": "גבוה" },
-  { "date": "2026-02-28", "km": 4.16, "minutes": 39, "pace": 9.38, "effort": "גבוה" }
+  { "date": "2026-02-28", "km": 4.16, "minutes": 39, "pace": 9.38, "effort": "גבוה" },
+  { "date": "2026-04-06", "km": 3.42, "minutes": 35, "pace": 10.23, "effort": "גבוה" }
 ]
